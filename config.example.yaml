@@ -5,9 +5,11 @@
 # Can also be set via HETZNER_API_TOKEN environment variable
 # hetzner_api_token: "your-token-here"
 
-# Hetzner DNS API token (optional, for DNS updates)
-# Can also be set via HETZNER_DNS_TOKEN environment variable
-# hetzner_dns_token: "your-dns-token-here"
+# Hetzner DNS API token (optional, for DNS PTR updates via Cloud Console)
+# Use this if your DNS is managed in a different Hetzner Cloud project
+# Can also be set via HETZNER_DNS_API_TOKEN environment variable
+# If not set, the main hetzner_api_token will be used
+# hetzner_dns_api_token: "your-dns-project-token-here"
 
 # Default server type
 default_server_type: cx11

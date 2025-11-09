@@ -139,17 +139,18 @@ def create(
             
             # Update DNS if zone specified
             if dns_zone:
-                dns_token = config.get_dns_token()
+                dns_token = config.get_dns_api_token()
                 if dns_token:
-                    click.echo(f"\nUpdating DNS record in zone '{dns_zone}'...")
+                    click.echo(f"\nUpdating DNS PTR record for '{dns_zone}'...")
                     dns_mgr = DNSManager(dns_token)
                     try:
-                        dns_mgr.update_server_dns(dns_zone, name, ip_address)
-                        click.echo(f"✓ DNS record updated: {name}.{dns_zone} -> {ip_address}")
+                        result = dns_mgr.update_server_dns(dns_zone, name, ip_address)
+                        if result:
+                            click.echo(f"✓ DNS PTR record updated: {name}.{dns_zone} -> {ip_address}")
                     except Exception as e:
                         click.echo(f"Warning: Could not update DNS: {e}", err=True)
                 else:
-                    click.echo("Warning: DNS zone specified but HETZNER_DNS_TOKEN not set", err=True)
+                    click.echo("Warning: DNS zone specified but HETZNER_DNS_API_TOKEN not set", err=True)
         
         if server.public_net.ipv6:
             click.echo(f"  IPv6: {server.public_net.ipv6.ip}")
@@ -397,8 +398,10 @@ def config(ctx, key, value, show):
         import os
         if os.getenv("HETZNER_API_TOKEN"):
             click.echo("  HETZNER_API_TOKEN: ***")
+        if os.getenv("HETZNER_DNS_API_TOKEN"):
+            click.echo("  HETZNER_DNS_API_TOKEN: ***")
         if os.getenv("HETZNER_DNS_TOKEN"):
-            click.echo("  HETZNER_DNS_TOKEN: ***")
+            click.echo("  HETZNER_DNS_TOKEN: *** (deprecated, use HETZNER_DNS_API_TOKEN)")
         
         return
     

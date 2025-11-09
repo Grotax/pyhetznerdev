@@ -45,9 +45,10 @@ class Config:
         """Get Hetzner API token from config or environment"""
         return self.get("hetzner_api_token") or os.getenv("HETZNER_API_TOKEN")
 
-    def get_dns_token(self) -> Optional[str]:
-        """Get Hetzner DNS API token from config or environment"""
-        return self.get("hetzner_dns_token") or os.getenv("HETZNER_DNS_TOKEN")
+    def get_dns_api_token(self) -> Optional[str]:
+        """Get Hetzner DNS API token from config or environment (for Cloud Console DNS)"""
+        # Check for DNS-specific token first, fall back to main API token
+        return self.get("hetzner_dns_api_token") or os.getenv("HETZNER_DNS_API_TOKEN") or self.get_api_token()
 
     def get_snapshot_max_age_days(self) -> int:
         """Get maximum snapshot age in days before refresh"""

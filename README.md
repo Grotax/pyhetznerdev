@@ -46,12 +46,14 @@ export HETZNER_API_TOKEN="your-token-here"
 pyhetznerdev config hetzner_api_token "your-token-here"
 ```
 
-For DNS features, you also need a Hetzner DNS API token:
+For DNS features, you can use a separate API token for DNS management (useful if DNS is in a different project):
 ```bash
-export HETZNER_DNS_TOKEN="your-dns-token-here"
+export HETZNER_DNS_API_TOKEN="your-dns-project-token-here"
 # or
-pyhetznerdev config hetzner_dns_token "your-dns-token-here"
+pyhetznerdev config hetzner_dns_api_token "your-dns-project-token-here"
 ```
+
+**Note:** If you don't set a separate DNS token, the tool will use the main API token for DNS operations.
 
 ### Configuration Options
 
@@ -165,10 +167,11 @@ When creating a server with `--snapshot`:
 ### DNS Updates
 
 When `--dns-zone` is specified:
-- The tool automatically creates or updates an A record for your server
-- The record name matches the server name
-- If the IP changes, the DNS record is updated automatically
-- Requires `HETZNER_DNS_TOKEN` to be set
+- The tool automatically updates the DNS PTR record for your server's IP
+- The PTR record is set to `servername.zone` (e.g., `myserver.example.com`)
+- DNS is managed through the Hetzner Cloud Console
+- If DNS is in a different project, set `HETZNER_DNS_API_TOKEN` with that project's token
+- If not set, the tool will use your main `HETZNER_API_TOKEN`
 
 ## Examples
 

@@ -10,11 +10,12 @@ pip install -e .
 # Set API token (required)
 export HETZNER_API_TOKEN="your-token"
 
-# Set DNS token (optional)
-export HETZNER_DNS_TOKEN="your-dns-token"
+# Set DNS token (optional, for separate DNS project)
+export HETZNER_DNS_API_TOKEN="your-dns-project-token"
 
 # Or use config file
 pyhetznerdev config hetzner_api_token "your-token"
+pyhetznerdev config hetzner_dns_api_token "your-dns-project-token"
 ```
 
 ## Common Commands
@@ -80,7 +81,7 @@ pyhetznerdev config snapshot_max_age_days 30         # Set max age
 | Option | Default | Description |
 |--------|---------|-------------|
 | `hetzner_api_token` | - | Hetzner Cloud API token (required) |
-| `hetzner_dns_token` | - | Hetzner DNS API token (optional) |
+| `hetzner_dns_api_token` | - | Hetzner DNS API token (optional, for separate DNS project) |
 | `default_server_type` | cx11 | Default server type |
 | `default_location` | nbg1 | Default location |
 | `default_image` | ubuntu-22.04 | Default image |
