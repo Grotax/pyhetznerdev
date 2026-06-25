@@ -1,0 +1,5 @@
+include README.md
+include LICENSE
+include config.example.yaml
+recursive-include pyhetznerdev *.py
+recursive-include tests *.py

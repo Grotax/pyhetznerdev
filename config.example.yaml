@@ -1,0 +1,24 @@
+# Example configuration file for pyhetznerdev
+# Copy this to ~/.config/pyhetznerdev/config.yaml and customize
+
+# Hetzner Cloud API token (required)
+# Can also be set via HETZNER_API_TOKEN environment variable
+# hetzner_api_token: "your-token-here"
+
+# Hetzner DNS API token (optional, for DNS PTR updates via Cloud Console)
+# Use this if your DNS is managed in a different Hetzner Cloud project
+# Can also be set via HETZNER_DNS_API_TOKEN environment variable
+# If not set, the main hetzner_api_token will be used
+# hetzner_dns_api_token: "your-dns-project-token-here"
+
+# Default server type
+default_server_type: cx11
+
+# Default location
+default_location: nbg1
+
+# Default image (when not using snapshots)
+default_image: ubuntu-22.04
+
+# Maximum snapshot age in days before update is suggested
+snapshot_max_age_days: 30
